@@ -1,0 +1,26 @@
+{
+  "name": "base-app",
+  "version": "0.1.0",
+  "description": "demo podium layout with vue frameworks",
+  "main": "layout.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "demo",
+    "podium",
+    "vue",
+    "micro frontends",
+    "layout"
+  ],
+  "author": "Jozzeh",
+  "license": "ISC",
+  "dependencies": {
+    "@podium/layout": "^4.5.1",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
