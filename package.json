@@ -4,7 +4,9 @@
   "description": "demo podium layout with vue frameworks",
   "main": "layout.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",    
+    "dev": "set NODE_ENV=development&& nodemon layout.js",
+    "prod": "set NODE_ENV=production&& nodemon layout.js"
   },
   "keywords": [
     "demo",
@@ -17,8 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "@podium/layout": "^4.5.1",
-    "express": "^4.17.1",
-    "handlebars": "^4.7.7"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

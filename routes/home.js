@@ -1,5 +1,6 @@
 const express = require('express') 
 const Layout = require("@podium/layout");
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 
 const app = express();
 
@@ -8,16 +9,15 @@ const layout = new Layout({
     name: "homeLayout", // required
     pathname: "/", // required
   });
-  
- 
+
   // registering the vue micro frontends (podlets)
   const vuemessagepod = layout.client.register({
     name: "vueMessagePod", // required
-    uri: "http://localhost:7100/manifest.json", // required
+    uri: `${process.env.VUEMESSAGEPOD_URL}manifest.json`,        
   });
   const vuereceivepod = layout.client.register({
-    name: "vueReceivePod", // required
-    uri: "http://localhost:7101/manifest.json", // required
+    name: "vueReceivePod", // required    
+    uri: `${process.env.VUERECEIVEPOD_URL}manifest.json`
   });
 
   layout.view = (incoming, body) => {
