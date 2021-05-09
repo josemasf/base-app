@@ -4,7 +4,7 @@
   "description": "demo podium layout with vue frameworks",
   "main": "layout.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",    
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "set NODE_ENV=development&& nodemon layout.js",
     "prod": "set NODE_ENV=production&& nodemon layout.js"
   },
