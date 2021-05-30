@@ -24,26 +24,33 @@ const layout = new Layout({
     name: "hbsHead", // required    
     uri: `${process.env.HBSHEAD_URL}manifest.json`
   });
+  
+  const vueLogin = layout.client.register({
+    name: "vueLogin", // required    
+    uri: `${process.env.VUELOGIN_URL}manifest.json`
+  });
 
  
   module.exports = {
     view: async function (req, res) {
         const incoming = res.locals.podium;
         //fetching the podlet data
-        const [sender, listener, head] = await Promise.all([
+        const [sender, listener, head, login] = await Promise.all([
             vuemessagepod.fetch(incoming),
             vuereceivepod.fetch(incoming),
             hbsHead.fetch(incoming),
+            vueLogin.fetch(incoming),
         ]);
 
         //binding the podlet data to the layout
-        incoming.podlets = [sender,listener];
+        incoming.podlets = [sender,listener, login];
         incoming.view.title = "Home ";
         
         const body = `
         <div>
         ${head.content}
         </div>
+       
         <div class="columns">
           <div class="column is-4">
             <section class="section ">${sender.content}</section>          
@@ -51,6 +58,9 @@ const layout = new Layout({
           <div class="column">
             <section class="section">${listener.content}</section>
           </div>
+        </div>
+        <div class="columns">
+          <div class="column is-12">Login ${login.content}</div>
         </div>
         `;
 
