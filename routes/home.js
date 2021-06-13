@@ -29,17 +29,23 @@ const layout = new Layout({
     name: "vueLogin", // required    
     uri: `${process.env.VUELOGIN_URL}manifest.json`
   });
+  
+  const htmlFooter = layout.client.register({
+    name: "htmlFooter", // required    
+    uri: `${process.env.HTMLFOOTER_URL}manifest.json`
+  });
 
  
   module.exports = {
     view: async function (req, res) {
         const incoming = res.locals.podium;
         //fetching the podlet data
-        const [sender, listener, header, login] = await Promise.all([
+        const [sender, listener, header, login, footer] = await Promise.all([
             vuemessagepod.fetch(incoming),
             vuereceivepod.fetch(incoming),
             vuehead.fetch(incoming),
             vueLogin.fetch(incoming),
+            htmlFooter.fetch(incoming),
         ]);
 
         //binding the podlet data to the layout
@@ -58,19 +64,23 @@ const layout = new Layout({
           <div class="column">
             <section class="section">${listener.content}</section>
           </div>
-        </div>        
+        </div>
+        <div class="columns">
+          <div class="column">
+            <section class="section">${footer.content}</section>
+          </div>
+        </div>
         <div class="columns">
           <div class="column">
             <section class="section">${login.content}</section>
           </div>
         </div>
+        
         `;
 
         const document = layout.render(incoming, body);
 
         res.podiumSend(document);
-
-        //res.send(document);
     }
     
 };
