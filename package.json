@@ -18,6 +18,7 @@
   "author": "Jozzeh",
   "license": "ISC",
   "dependencies": {
+    "@podium/browser": "^1.1.0",
     "@podium/layout": "^4.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1"

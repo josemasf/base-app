@@ -23,14 +23,10 @@ layout.css({ value: 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css'
 app.use(layout.pathname(), layout.middleware());
 
 // what should be returned when someone goes to the root URL
-app.get("/", async (req, res) => {
-  
+app.get("/", async (req, res) => {  
   home.view(req, res)
 });
 
-app.get("/home", async (req, res) => {
-  home.view(req, res)
-});
 
 
 app.set('port', port);

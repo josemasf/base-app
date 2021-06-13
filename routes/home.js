@@ -20,11 +20,11 @@ const layout = new Layout({
     uri: `${process.env.VUERECEIVEPOD_URL}manifest.json`
   });
   
-  const hbsHead = layout.client.register({
-    name: "hbsHead", // required    
-    uri: `${process.env.HBSHEAD_URL}manifest.json`
+  const vuehead = layout.client.register({
+    name: "vueHeader", // required    
+    uri: `${process.env.VUEHEAD_URL}manifest.json`
   });
-  
+   
   const vueLogin = layout.client.register({
     name: "vueLogin", // required    
     uri: `${process.env.VUELOGIN_URL}manifest.json`
@@ -35,20 +35,19 @@ const layout = new Layout({
     view: async function (req, res) {
         const incoming = res.locals.podium;
         //fetching the podlet data
-        const [sender, listener, head, login] = await Promise.all([
+        const [sender, listener, header] = await Promise.all([
             vuemessagepod.fetch(incoming),
             vuereceivepod.fetch(incoming),
-            hbsHead.fetch(incoming),
-            vueLogin.fetch(incoming),
+            vuehead.fetch(incoming)
         ]);
 
         //binding the podlet data to the layout
-        incoming.podlets = [sender,listener, login];
+        incoming.podlets = [ header,sender,listener];
         incoming.view.title = "Home ";
-        
+
         const body = `
-        <div>
-        ${head.content}
+        <div class="columns">
+        <div class="column is-12">${header.content}</div>
         </div>
        
         <div class="columns">
@@ -58,15 +57,14 @@ const layout = new Layout({
           <div class="column">
             <section class="section">${listener.content}</section>
           </div>
-        </div>
-        <div class="columns">
-          <div class="column is-12">Login ${login.content}</div>
-        </div>
+        </div>        
         `;
 
         const document = layout.render(incoming, body);
 
-        res.send(document);
+        res.podiumSend(document);
+
+        //res.send(document);
     }
     
 };
