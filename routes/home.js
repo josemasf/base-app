@@ -35,14 +35,15 @@ const layout = new Layout({
     view: async function (req, res) {
         const incoming = res.locals.podium;
         //fetching the podlet data
-        const [sender, listener, header] = await Promise.all([
+        const [sender, listener, header, login] = await Promise.all([
             vuemessagepod.fetch(incoming),
             vuereceivepod.fetch(incoming),
-            vuehead.fetch(incoming)
+            vuehead.fetch(incoming),
+            vueLogin.fetch(incoming),
         ]);
 
         //binding the podlet data to the layout
-        incoming.podlets = [ header,sender,listener];
+        incoming.podlets = [ header,sender,listener, login];
         incoming.view.title = "Home ";
 
         const body = `
@@ -58,6 +59,11 @@ const layout = new Layout({
             <section class="section">${listener.content}</section>
           </div>
         </div>        
+        <div class="columns">
+          <div class="column">
+            <section class="section">${login.content}</section>
+          </div>
+        </div>
         `;
 
         const document = layout.render(incoming, body);
