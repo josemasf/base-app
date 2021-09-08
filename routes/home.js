@@ -30,9 +30,9 @@ const layout = new Layout({
     uri: `${process.env.VUELOGIN_URL}manifest.json`
   });
   
-  const htmlFooter = layout.client.register({
-    name: "htmlFooter", // required    
-    uri: `${process.env.HTMLFOOTER_URL}manifest.json`
+  const vueFooter = layout.client.register({
+    name: "vueFooter", // required    
+    uri: `${process.env.VUEFOOTER_URL}manifest.json`
   });
 
  
@@ -45,11 +45,11 @@ const layout = new Layout({
             vuereceivepod.fetch(incoming),
             vuehead.fetch(incoming),
             vueLogin.fetch(incoming),
-            htmlFooter.fetch(incoming),
+            vueFooter.fetch(incoming),
         ]);
 
         //binding the podlet data to the layout
-        incoming.podlets = [ header,sender,listener, login];
+        incoming.podlets = [ header,sender,listener, login, footer];
         incoming.view.title = "Home ";
 
         const body = `
