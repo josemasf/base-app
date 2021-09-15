@@ -11,6 +11,9 @@ dotenv.config({
 const port = process.env.PORT || 3000;
 
 const home = require('./routes/home');
+const hotels = require('./routes/hotels');
+const categories = require('./routes/categories');
+
 const Layout = require("@podium/layout");
 
 // registering the layout
@@ -25,6 +28,12 @@ app.use(layout.pathname(), layout.middleware());
 // what should be returned when someone goes to the root URL
 app.get("/", async (req, res) => {  
   home.view(req, res)
+});
+app.get("/hotels", async (req, res) => {  
+  hotels.view(req, res)
+});
+app.get("/categories", async (req, res) => {  
+  categories.view(req, res)
 });
 
 
