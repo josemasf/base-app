@@ -22,6 +22,8 @@ const layout = new Layout({
   pathname: "/", // required
 });
 layout.css({ value: 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css' })
+layout.css({ value: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' })
+layout.css({ value: 'https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css' })
 
 app.use(layout.pathname(), layout.middleware());
 
