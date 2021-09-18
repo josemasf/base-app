@@ -5,6 +5,10 @@ require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 const layout = new Layout({
     name: "homeLayout", // required
     pathname: "/", // required
+    client: {
+      retries: 6,
+      maxAge: 60000
+    },
   });
 
   // registering the vue micro frontends (podlets)

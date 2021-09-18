@@ -19,7 +19,11 @@ const Layout = require("@podium/layout");
 // registering the layout
 const layout = new Layout({
   name: "vueLayout", // required
-  pathname: "/", // required
+  pathname: "/", // required,
+  client: {
+    retries: 6,
+    maxAge: 60000
+  },
 });
 layout.css({ value: 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css' })
 layout.css({ value: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' })
